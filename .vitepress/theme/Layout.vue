@@ -6,8 +6,8 @@
           <h1>📚 3D Лекції</h1>
         </div>
         <ul class="nav-menu">
-          <li><router-link to="/">Головна</router-link></li>
-          <li><router-link to="/solar-system">Рух по колу</router-link></li>
+          <li><a href="/">Головна</a></li>
+          <li><a href="/3d-lecture-demo/solar-system">Рух по колу</a></li>
         </ul>
       </div>
     </nav>
@@ -17,7 +17,7 @@
         <div class="sidebar-content">
           <h3>📖 Розділи</h3>
           <ul>
-            <li><router-link to="/solar-system" active-class="active">Рух по колу в 3D просторі</router-link></li>
+            <li><a href="/3d-lecture-demo/solar-system" class="sidebar-link">Рух по колу в 3D просторі</a></li>
           </ul>
         </div>
       </aside>
@@ -34,13 +34,19 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useRoute } from 'vitepress'
 
 const route = useRoute()
+const isMounted = ref(false)
+
+onMounted(() => {
+  isMounted.value = true
+})
 
 const showSidebar = computed(() => {
-  return route.path !== '/'
+  if (!isMounted.value) return false
+  return route.path !== '/' && route.path !== '/3d-lecture-demo/'
 })
 </script>
 
@@ -93,8 +99,7 @@ const showSidebar = computed(() => {
   transition: color 0.3s;
 }
 
-.nav-menu a:hover,
-.nav-menu a.router-link-active {
+.nav-menu a:hover {
   color: #0066cc;
 }
 
