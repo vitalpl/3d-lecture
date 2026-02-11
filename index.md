@@ -9,16 +9,19 @@ hero:
   actions:
     - theme: brand
       text: Рух по колу
-      link: /solar-system
+      link: /3d-lecture-demo/solar-system
     - theme: alt
-      text: Документація
-      link: /markdown-examples
+      text: Всі лекції
+      link: /3d-lecture-demo/rotating-shapes
 
 features:
-  - title: ⚙️ Three.js
-    details: Потужна 3D бібліотека для JavaScript
-  - title: 📖 VitePress
-    details: Швидкий генератор статичних сайтів на базі Vue.js
-  - title: 🚀 Інтерактивні приклади
-    details: Живі демонстрації прямо в статтях
+  - title: 🌍 Рух по колу
+    details: Вивчайте орбітальну механіку на прикладі Сонячної системи
+  - title: 🔄 Геометрія й обертання
+    details: Eksperymentujte з різними формами та швидкістю обертання
+  - title: 💫 Системи частинок
+    details: Симулюйте фізику з гравітацією та взаємодіями
+  - title: 💡 Освітлення
+    details: Дізнайтеся як правильне освітлення змінює все
 ---
+
