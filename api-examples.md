@@ -1,49 +1,59 @@
----
-outline: deep
----
+# API Приклади
 
-# Runtime API Examples
+Приклади роботи з JavaScript API та Three.js для 3D графіки.
 
-This page demonstrates usage of some of the runtime APIs provided by VitePress.
+## Основні API об'єкти
 
-The main `useData()` API can be used to access site, theme, and page data for the current page. It works in both `.md` and `.vue` files:
+### Three.js Scene
 
-```md
-<script setup>
-import { useData } from 'vitepress'
-
-const { theme, page, frontmatter } = useData()
-</script>
-
-## Results
-
-### Theme Data
-<pre>{{ theme }}</pre>
-
-### Page Data
-<pre>{{ page }}</pre>
-
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
+```javascript
+const scene = new THREE.Scene()
+scene.background = new THREE.Color(0x000000)
 ```
 
-<script setup>
-import { useData } from 'vitepress'
+### Camera
 
-const { site, theme, page, frontmatter } = useData()
-</script>
+```javascript
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  10000
+)
+camera.position.z = 100
+```
 
-## Results
+### Renderer
 
-### Theme Data
-<pre>{{ theme }}</pre>
+```javascript
+const renderer = new THREE.WebGLRenderer()
+renderer.setSize(window.innerWidth, window.innerHeight)
+document.body.appendChild(renderer.domElement)
+```
 
-### Page Data
-<pre>{{ page }}</pre>
+## Геометрія та матеріали
 
-### Page Frontmatter
-<pre>{{ frontmatter }}</pre>
+```javascript
+// Сфера
+const geometry = new THREE.SphereGeometry(5, 32, 32)
+const material = new THREE.MeshPhongMaterial({ color: 0x0066cc })
+const mesh = new THREE.Mesh(geometry, material)
+scene.add(mesh)
+```
 
-## More
+## Анімація
 
-Check out the documentation for the [full list of runtime APIs](https://vitepress.dev/reference/runtime-api#usedata).
+```javascript
+function animate() {
+  requestAnimationFrame(animate)
+  
+  mesh.rotation.x += 0.01
+  mesh.rotation.y += 0.01
+  
+  renderer.render(scene, camera)
+}
+
+animate()
+```
+
+Детальніше можна дізнатися в [лекції про рух по колу](/solar-system).

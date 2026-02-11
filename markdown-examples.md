@@ -1,85 +1,53 @@
-# Markdown Extension Examples
+# Приклади Markdown
 
-This page demonstrates some of the built-in markdown extensions provided by VitePress.
+Цей файл містить приклади синтаксису Markdown, який можна використовувати у навчальному ресурсі.
 
-## Syntax Highlighting
-
-VitePress provides Syntax Highlighting powered by [Shiki](https://github.com/shikijs/shiki), with additional features like line-highlighting:
-
-**Input**
-
-````md
-```js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
-}
-```
-````
-
-**Output**
-
-```js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
-}
-```
-
-## Custom Containers
-
-**Input**
+## Заголовки
 
 ```md
-::: info
-This is an info box.
-:::
-
-::: tip
-This is a tip.
-:::
-
-::: warning
-This is a warning.
-:::
-
-::: danger
-This is a dangerous warning.
-:::
-
-::: details
-This is a details block.
-:::
+# H1
+## H2
+### H3
 ```
 
-**Output**
+## Текстове форматування
 
-::: info
-This is an info box.
-:::
+```md
+**Жирний текст**, *курсив*, ~~закреслений текст~~
+```
 
-::: tip
-This is a tip.
-:::
+**Жирний текст**, *курсив*, ~~закреслений текст~~
 
-::: warning
-This is a warning.
-:::
+## Списки
 
-::: danger
-This is a dangerous warning.
-:::
+```md
+- Пункт 1
+- Пункт 2
+  - Підпункт 2.1
 
-::: details
-This is a details block.
-:::
+1. Нумерований пункт 1
+2. Нумерований пункт 2
+```
 
-## More
+## Блоки коду
 
-Check out the documentation for the [full list of markdown extensions](https://vitepress.dev/guide/markdown).
+\`\`\`javascript
+function hello() {
+  console.log('Hello, World!')
+}
+\`\`\`
+
+## Цитати
+
+> Це цитата, яка добре відображається в навчальному матеріалі
+
+## Таблиці
+
+| Колонка 1 | Колонка 2 |
+|-----------|-----------|
+| Дані 1    | Дані 2    |
+| Дані 3    | Дані 4    |
+
+## Посилання
+
+[Назад до рукуху по колу](/solar-system)

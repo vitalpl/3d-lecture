@@ -3,23 +3,22 @@
 layout: home
 
 hero:
-  name: "3d-demo"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  name: "3D Лекції"
+  text: "VitePress + Three.js"
+  tagline: Інтерактивні приклади 3D графіки
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Рух по колу
+      link: /solar-system
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Документація
+      link: /markdown-examples
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: ⚙️ Three.js
+    details: Потужна 3D бібліотека для JavaScript
+  - title: 📖 VitePress
+    details: Швидкий генератор статичних сайтів на базі Vue.js
+  - title: 🚀 Інтерактивні приклади
+    details: Живі демонстрації прямо в статтях
 ---
-

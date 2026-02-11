@@ -1,6 +1,8 @@
 # VitePress core
 docs/.vitepress/dist
 docs/.vitepress/cache
+.vitepress/cache
+.vitepress/heme
 
 # Залежності
 node_modules/
