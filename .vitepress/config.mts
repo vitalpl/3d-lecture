@@ -4,4 +4,6 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "3D Лекції",
   description: "Навчальний ресурс з 3D графіки",
-  themeConfig: {}})
+  base: '/3d-lecture-demo/',
+  themeConfig: {}
+})
