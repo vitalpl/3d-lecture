@@ -1,0 +1,17 @@
+# VitePress core
+docs/.vitepress/dist
+docs/.vitepress/cache
+
+# Залежності
+node_modules/
+
+# Локальні змінні оточення
+.env
+*.local
+
+# Логи та системні файли
+*.log
+.DS_Store
+
+.vscode/
+.idea/
