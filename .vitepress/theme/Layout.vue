@@ -7,10 +7,10 @@
         </div>
         <ul class="nav-menu">
           <li><a href="/">Головна</a></li>
-          <li><a href="/3d-lecture-demo/solar-system">Рух по колу</a></li>
-          <li><a href="/3d-lecture-demo/rotating-shapes">Форми</a></li>
-          <li><a href="/3d-lecture-demo/particle-system">Частинки</a></li>
-          <li><a href="/3d-lecture-demo/lighting-demo">Світло</a></li>
+          <li><a href="/3d-lecture/solar-system">Рух по колу</a></li>
+          <li><a href="/3d-lecture/rotating-shapes">Форми</a></li>
+          <li><a href="/3d-lecture/particle-system">Частинки</a></li>
+          <li><a href="/3d-lecture/lighting-demo">Світло</a></li>
         </ul>
       </div>
     </nav>
@@ -20,10 +20,10 @@
         <div class="sidebar-content">
           <h3>📖 Розділи</h3>
           <ul>
-            <li><a href="/3d-lecture-demo/solar-system" class="sidebar-link">Рух по колу в 3D просторі</a></li>
-            <li><a href="/3d-lecture-demo/rotating-shapes" class="sidebar-link">Обертаючі форми</a></li>
-            <li><a href="/3d-lecture-demo/particle-system" class="sidebar-link">Системи частинок</a></li>
-            <li><a href="/3d-lecture-demo/lighting-demo" class="sidebar-link">Освітлення & матеріали</a></li>
+            <li><a href="/3d-lecture/solar-system" class="sidebar-link">Рух по колу в 3D просторі</a></li>
+            <li><a href="/3d-lecture/rotating-shapes" class="sidebar-link">Обертаючі форми</a></li>
+            <li><a href="/3d-lecture/particle-system" class="sidebar-link">Системи частинок</a></li>
+            <li><a href="/3d-lecture/lighting-demo" class="sidebar-link">Освітлення & матеріали</a></li>
           </ul>
         </div>
       </aside>
