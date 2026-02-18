@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "3D Лекції"
+  name: "Віртуальна лабораторія 3DLab"
   text: "VitePress + Three.js"
   tagline: Інтерактивні приклади 3D графіки
   actions:
