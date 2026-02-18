@@ -3,7 +3,7 @@
     <nav class="navbar">
       <div class="nav-container">
         <div class="logo">
-          <h1>📚 3D Лекції</h1>
+          <h1>📚 Віртуальна лабораторія 3DLab</h1>
         </div>
         <ul class="nav-menu">
           <li><a href="/">Головна</a></li>
@@ -34,7 +34,7 @@
     </div>
 
     <footer class="footer">
-      <p>© 2026 3D Лекції · Навчальний ресурс</p>
+      <p>© 2026 3DLab · Навчальний ресурс</p>
     </footer>
   </div>
 </template>
