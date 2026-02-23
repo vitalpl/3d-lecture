@@ -1,57 +1,67 @@
 <template>
   <div class="layout">
-    <!-- Navbar -->
-    <header class="navbar">
+    <nav class="navbar">
       <div class="nav-container">
-        <h1 class="logo">📚 Віртуальна лабораторія 3DLab</h1>
-        <nav class="nav-menu">
-          <a href="/">Головна</a>
-          <a href="/3d-lecture/solar-system">Рух по колу</a>
-          <a href="/3d-lecture/rotating-shapes">Форми</a>
-          <a href="/3d-lecture/particle-system">Частинки</a>
-          <a href="/3d-lecture/lighting-demo">Світло</a>
-        </nav>
-      </div>
-    </header>
-
-    <!-- Content -->
-    <div class="content-wrapper">
-      <aside v-if="showSidebar" class="sidebar">
-        <h3>📖 Розділи</h3>
-        <ul>
+        <div class="logo">
+          <h1>📚 Віртуальна лабораторія 3DLab</h1>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="/">Головна</a></li>
           <li><a href="/3d-lecture/solar-system">Рух по колу</a></li>
-          <li><a href="/3d-lecture/rotating-shapes">Обертаючі форми</a></li>
-          <li><a href="/3d-lecture/particle-system">Системи частинок</a></li>
-          <li><a href="/3d-lecture/lighting-demo">Освітлення</a></li>
+          <li><a href="/3d-lecture/rotating-shapes">Форми</a></li>
+          <li><a href="/3d-lecture/particle-system">Частинки</a></li>
+          <li><a href="/3d-lecture/lighting-demo">Світло</a></li>
         </ul>
+      </div>
+    </nav>
+
+    <div class="content-wrapper">
+      <aside class="sidebar" v-if="showSidebar">
+        <div class="sidebar-content">
+          <h3>📖 Розділи</h3>
+          <ul>
+            <li><a href="/3d-lecture/solar-system" class="sidebar-link">Рух по колу в 3D просторі</a></li>
+            <li><a href="/3d-lecture/rotating-shapes" class="sidebar-link">Обертаючі форми</a></li>
+            <li><a href="/3d-lecture/particle-system" class="sidebar-link">Системи частинок</a></li>
+            <li><a href="/3d-lecture/lighting-demo" class="sidebar-link">Освітлення & матеріали</a></li>
+          </ul>
+        </div>
       </aside>
 
-      <!-- ВАЖЛИВО: vp-doc -->
-      <main class="main-content vp-doc">
+      <main class="main-content">
         <Content />
       </main>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
-      © 2026 3DLab · Навчальний ресурс
+      <p>© 2026 3DLab · Навчальний ресурс</p>
     </footer>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useRoute } from 'vitepress'
 
 const route = useRoute()
+const isMounted = ref(false)
+
+onMounted(() => {
+  isMounted.value = true
+})
 
 const showSidebar = computed(() => {
-  return route.path !== '/'
+  if (!isMounted.value) return false
+  return route.path !== '/' && route.path !== '/3d-lecture-demo/'
 })
 </script>
 
-<style>
-/* НЕ scoped — щоб не ламати deep стилі VitePress */
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .layout {
   display: flex;
@@ -60,7 +70,6 @@ const showSidebar = computed(() => {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-/* Navbar */
 .navbar {
   background: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -78,66 +87,77 @@ const showSidebar = computed(() => {
   align-items: center;
 }
 
-.logo {
-  font-size: 1.4rem;
+.logo h1 {
+  font-size: 1.5rem;
   color: #333;
 }
 
 .nav-menu {
   display: flex;
-  gap: 1.5rem;
+  list-style: none;
+  gap: 2rem;
 }
 
 .nav-menu a {
   text-decoration: none;
   color: #555;
   font-weight: 500;
-  transition: 0.3s;
+  transition: color 0.3s;
 }
 
 .nav-menu a:hover {
   color: #0066cc;
 }
 
-/* Content layout */
 .content-wrapper {
   flex: 1;
   display: flex;
   max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
   gap: 2rem;
+  padding: 2rem;
 }
 
 .sidebar {
-  width: 240px;
+  width: 250px;
   background: white;
-  padding: 1.5rem;
   border-radius: 8px;
+  padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   height: fit-content;
+  position: sticky;
+  top: 80px;
 }
 
-.sidebar h3 {
+.sidebar-content h3 {
   margin-bottom: 1rem;
+  color: #333;
+  font-size: 1.1rem;
 }
 
-.sidebar ul {
+.sidebar-content ul {
   list-style: none;
-  padding: 0;
 }
 
-.sidebar li {
+.sidebar-content li {
   margin-bottom: 0.5rem;
 }
 
-.sidebar a {
+.sidebar-content a {
   text-decoration: none;
   color: #666;
+  display: block;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s;
 }
 
-.sidebar a:hover {
+.sidebar-content a:hover,
+.sidebar-content a.active {
+  background: #f0f4ff;
   color: #0066cc;
+  font-weight: 600;
 }
 
 .main-content {
@@ -148,17 +168,116 @@ const showSidebar = computed(() => {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Footer */
+.main-content :deep(h1) {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  border-bottom: 3px solid #0066cc;
+  padding-bottom: 1rem;
+}
+
+.main-content :deep(h2) {
+  color: #333;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.main-content :deep(h3) {
+  color: #555;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.main-content :deep(p) {
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.main-content :deep(code) {
+  background: #f4f4f4;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  color: #d73a49;
+}
+
+.main-content :deep(pre) {
+  background: #282c34;
+  color: #abb2bf;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.main-content :deep(pre code) {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+.main-content :deep(ul),
+.main-content :deep(ol) {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+.main-content :deep(li) {
+  margin-bottom: 0.5rem;
+  line-height: 1.8;
+}
+
+.main-content :deep(table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.main-content :deep(th) {
+  background: #f0f4ff;
+  color: #333;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid #0066cc;
+  font-weight: 600;
+}
+
+.main-content :deep(td) {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+  color: #666;
+}
+
+.main-content :deep(tr:hover) {
+  background: #f9fafb;
+}
+
+.main-content :deep(a) {
+  color: #0066cc;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.main-content :deep(a:hover) {
+  color: #0052a3;
+  text-decoration: underline;
+}
+
 .footer {
   background: white;
   border-top: 1px solid #eee;
   padding: 2rem;
   text-align: center;
-  font-size: 0.9rem;
   color: #999;
+  font-size: 0.9rem;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .content-wrapper {
     flex-direction: column;
@@ -167,6 +286,7 @@ const showSidebar = computed(() => {
 
   .sidebar {
     width: 100%;
+    position: static;
   }
 
   .nav-container {
@@ -175,8 +295,11 @@ const showSidebar = computed(() => {
   }
 
   .nav-menu {
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 1rem;
+  }
+
+  .main-content {
+    padding: 1.5rem;
   }
 }
 </style>
