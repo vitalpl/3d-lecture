@@ -42,7 +42,6 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { useRoute } from 'vitepress'
-import Content from 'vitepress'
 
 const route = useRoute()
 const isMounted = ref(false)

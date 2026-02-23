@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import * as THREE from 'three'
 
 const canvas = ref(null)
@@ -37,7 +37,7 @@ let mesh = null
 let scene = null
 
 const createShape = (type, color) => {
-  if (mesh) scene.remove(mesh)
+  if (mesh && scene) scene.remove(mesh)
   
   let geometry
   if (type === 'cube') {
@@ -53,7 +53,7 @@ const createShape = (type, color) => {
     shininess: 100
   })
   mesh = new THREE.Mesh(geometry, material)
-  scene.add(mesh)
+  if (scene) scene.add(mesh)
 }
 
 onMounted(() => {
@@ -125,19 +125,12 @@ onMounted(() => {
 })
 
 // Watch for changes
-onMounted(() => {
-  const watchColor = () => {
-    if (mesh) mesh.material.color.set(shapeColor.value)
-  }
+watch(() => shapeColor.value, () => {
+  if (mesh) mesh.material.color.set(shapeColor.value)
+})
 
-  const watchShape = () => {
-    createShape(shapeType.value, shapeColor.value)
-  }
-
-  import('vue').then(({ watch }) => {
-    watch(() => shapeColor.value, watchColor)
-    watch(() => shapeType.value, watchShape)
-  })
+watch(() => shapeType.value, () => {
+  createShape(shapeType.value, shapeColor.value)
 })
 </script>
 
