@@ -1,104 +1,114 @@
----
-layout: page
-title: Обертаючі форми
-description: Вивчаємо обертання об'єктів у 3D просторі
----
+<template>
+  <div ref="container" class="rotating-shapes-container"></div>
+</template>
 
-# Обертаючі форми і геометрія
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import * as THREE from 'three'
 
-## Вступ
+const container = ref(null)
+let renderer = null
+let animationId = null
 
-На цій сторінці ви дізнаєтеся про обертання об'єктів у тривимірному просторі та властивості **Euler кутів** у Three.js.
+onMounted(() => {
+  if (!container.value) return
 
-## Поняття обертання
+  // Сцена
+  const scene = new THREE.Scene()
+  scene.background = new THREE.Color(0x101010)
 
-Обертання в 3D просторі описується трьома кутами:
-- **Rotation X** - обертання навколо осі X
-- **Rotation Y** - обертання навколо осі Y  
-- **Rotation Z** - обертання навколо осі Z
+  // Камера
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    container.value.clientWidth / container.value.clientHeight,
+    0.1,
+    1000
+  )
+  camera.position.z = 20
 
-Ці кути вимірюються в **радіанах** (0 до 2π).
+  // Рендерер
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+  renderer.setSize(container.value.clientWidth, container.value.clientHeight)
+  renderer.setPixelRatio(window.devicePixelRatio)
+  container.value.appendChild(renderer.domElement)
 
-## Математика обертання
+  // Освітлення
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
+  scene.add(ambientLight)
+  const pointLight = new THREE.PointLight(0xffffff, 0.8)
+  pointLight.position.set(10, 10, 10)
+  scene.add(pointLight)
 
-Матриця обертання описує як змінюються координати точки при обертанні. Для обертання навколо осі Y на кут θ:
+  // Форми
+  const objects = []
 
-$$R_y(\theta) = \begin{pmatrix}
-\cos(\theta) & 0 & \sin(\theta) \\
-0 & 1 & 0 \\
--\sin(\theta) & 0 & \cos(\theta)
-\end{pmatrix}$$
+  // Куб
+  const box = new THREE.Mesh(
+    new THREE.BoxGeometry(3, 3, 3),
+    new THREE.MeshPhongMaterial({ color: 0xff0000, shininess: 50 })
+  )
+  box.position.x = -6
+  scene.add(box)
+  objects.push({ mesh: box, speed: 0.01 })
 
-## Інтерактивна демонстрація
+  // Сфера
+  const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(2, 32, 32),
+    new THREE.MeshPhongMaterial({ color: 0x00ff00, shininess: 100 })
+  )
+  sphere.position.x = 0
+  scene.add(sphere)
+  objects.push({ mesh: sphere, speed: 0.008 })
 
-Експериментуйте з елементами керування нижче:
+  // Піраміда
+  const cone = new THREE.Mesh(
+    new THREE.ConeGeometry(2, 4, 32),
+    new THREE.MeshPhongMaterial({ color: 0x0000ff, shininess: 80 })
+  )
+  cone.position.x = 6
+  scene.add(cone)
+  objects.push({ mesh: cone, speed: 0.012 })
 
-<RotatingShapes />
+  // Анімація
+  const animate = () => {
+    animationId = requestAnimationFrame(animate)
+    objects.forEach(obj => {
+      obj.mesh.rotation.x += obj.speed
+      obj.mesh.rotation.y += obj.speed
+    })
+    renderer.render(scene, camera)
+  }
+  animate()
 
-## Класичні геометрії Three.js
+  // Resize
+  const handleResize = () => {
+    const width = container.value?.clientWidth || 0
+    const height = container.value?.clientHeight || 0
+    camera.aspect = width / height
+    camera.updateProjectionMatrix()
+    renderer.setSize(width, height)
+  }
 
-### Куб (BoxGeometry)
-```javascript
-const geometry = new THREE.BoxGeometry(width, height, depth)
-```
-- Найпроста форма
-- Ідеально для вивчення базових принципів
+  window.addEventListener('resize', handleResize)
 
-### Сфера (SphereGeometry)
-```javascript
-const geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments)
-```
-- Гладка, органічна форма
-- Вимагає більше вершин для гладкої поверхні
-
-### Піраміда (ConeGeometry)
-```javascript
-const geometry = new THREE.ConeGeometry(radius, height, radialSegments)
-```
-- Використовується для конусів і пірамід
-- Гарна для изучения граней (faces)
-
-## Матеріали
-
-У прикладі використовується **MeshPhongMaterial**, який відповідає за:
-- **Diffuse color** - основний колір об'єкта
-- **Specular highlights** - блиск від світла
-- **Shininess** - інтенсивність відбитків
-
-```javascript
-const material = new THREE.MeshPhongMaterial({
-  color: 0x0066cc,           // Основний колір
-  shininess: 100              // Глянцеватість (0-100)
+  onUnmounted(() => {
+    window.removeEventListener('resize', handleResize)
+    if (animationId) cancelAnimationFrame(animationId)
+    if (renderer) {
+      renderer.dispose()
+      container.value?.removeChild(renderer.domElement)
+    }
+  })
 })
-```
+</script>
 
-## Властивості object3D
-
-```javascript
-// Положення
-mesh.position.set(x, y, z)
-
-// Обертання (у радіанах)
-mesh.rotation.x = Math.PI / 4
-mesh.rotation.y = Math.PI / 6
-
-// Масштабування
-mesh.scale.set(1.5, 1.5, 1.5)
-
-// Комбіноване обертання
-mesh.rotation.order = 'YXZ'  // Порядок застосування обертань
-```
-
-## Завдання для експериментів
-
-1. **Комбінуйте форми** - Створіть складну структуру з кількох куб або сфер
-2. **Використовуйте разні швидкості** - Кожна форма обертається з власною швидкістю
-3. **Змініть матеріали** - Різні матеріали дають різні результати освітлення
-4. **Змініть позиції** - Розмістіть об'єкти на різних позиціях у просторі
-
-## Посилання
-
-- [Three.js BoxGeometry](https://threejs.org/docs/#api/en/geometries/BoxGeometry)
-- [Three.js SphereGeometry](https://threejs.org/docs/#api/en/geometries/SphereGeometry)
-- [Three.js Materials](https://threejs.org/docs/#api/en/materials/Material)
-- [Euler Angles (Wikipedia)](https://en.wikipedia.org/wiki/Euler_angles)
+<style scoped>
+.rotating-shapes-container {
+  width: 100%;
+  height: 500px;
+  border-radius: 8px;
+  background: #101010;
+  margin: 20px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+</style>
