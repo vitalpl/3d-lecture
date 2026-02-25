@@ -11,6 +11,7 @@
           <li><a href="/3d-lecture/rotating-shapes">Форми</a></li>
           <li><a href="/3d-lecture/particle-system">Частинки</a></li>
           <li><a href="/3d-lecture/lighting-demo">Світло</a></li>
+          <li><a href="/3d-lecture/blender-model">Blender</a></li>
         </ul>
       </div>
     </nav>
@@ -24,6 +25,7 @@
             <li><a href="/3d-lecture/rotating-shapes" class="sidebar-link">Обертаючі форми</a></li>
             <li><a href="/3d-lecture/particle-system" class="sidebar-link">Системи частинок</a></li>
             <li><a href="/3d-lecture/lighting-demo" class="sidebar-link">Освітлення & матеріали</a></li>
+            <li><a href="/3d-lecture/blender-model" class="sidebar-link">Blender-модель</a></li>
           </ul>
         </div>
       </aside>
