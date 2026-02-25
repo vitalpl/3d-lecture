@@ -202,12 +202,6 @@ onMounted(() => {
   const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.6)
   scene.add(hemisphereLight)
 
-  // Grid helper (subtle)
-  const grid = new THREE.GridHelper(20, 20, 0x444444, 0x222222)
-  grid.material.opacity = 0.3
-  grid.material.transparent = true
-  scene.add(grid)
-
   // Animation loop
   function animate() {
     animationId = requestAnimationFrame(animate)
