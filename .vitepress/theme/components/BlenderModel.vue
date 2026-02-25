@@ -108,6 +108,8 @@ function loadModel(url) {
       }
 
       const model = gltf.scene
+      // Blender exports Z-up, Three.js uses Y-up → rotate -90° on X
+      model.rotation.x = -Math.PI / 2
       scene.add(model)
       currentModel = model
 
@@ -180,6 +182,9 @@ onMounted(() => {
   controls.autoRotateSpeed = 2.0
   controls.minDistance = 0.5
   controls.maxDistance = 500
+  // Дозволити повне обертання на 360° по вертикалі
+  controls.minPolarAngle = 0
+  controls.maxPolarAngle = Math.PI
 
   // Lighting — студійне освітлення
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
