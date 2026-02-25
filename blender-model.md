@@ -85,6 +85,8 @@ Vertex Colors:       якщо використовуєте
 
 ### Завантаження моделі — GLTFLoader
 
+<div v-pre>
+
 ```javascript
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
@@ -103,7 +105,11 @@ loader.load(url, (gltf) => {
 })
 ```
 
+</div>
+
 ### Інтерактивне керування камерою — OrbitControls
+
+<div v-pre>
 
 ```javascript
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
@@ -114,6 +120,8 @@ controls.dampingFactor = 0.08
 controls.autoRotate = true          // автообертання
 controls.autoRotateSpeed = 2.0
 ```
+
+</div>
 
 **Управління мишкою:**
 
