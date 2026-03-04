@@ -79,50 +79,6 @@ Vertex Colors:       якщо використовуєте
 
 ---
 
-## Як це працює — код компонента
-
-Компонент `BlenderModel` побудований на основі **Three.js** і використовує:
-
-### Завантаження моделі — GLTFLoader
-
-<div v-pre>
-
-```javascript
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-
-const loader = new GLTFLoader()
-loader.load(url, (gltf) => {
-  const model = gltf.scene
-  scene.add(model)
-
-  // Якщо є анімації — запускаємо їх
-  if (gltf.animations.length > 0) {
-    const mixer = new THREE.AnimationMixer(model)
-    gltf.animations.forEach((clip) => {
-      mixer.clipAction(clip).play()
-    })
-  }
-})
-```
-
-</div>
-
-### Інтерактивне керування камерою — OrbitControls
-
-<div v-pre>
-
-```javascript
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-
-const controls = new OrbitControls(camera, renderer.domElement)
-controls.enableDamping = true       // плавне гальмування
-controls.dampingFactor = 0.08
-controls.autoRotate = true          // автообертання
-controls.autoRotateSpeed = 2.0
-```
-
-</div>
-
 **Управління мишкою:**
 
 | Дія                  | Ефект                  |
@@ -131,64 +87,6 @@ controls.autoRotateSpeed = 2.0
 | Права кнопка + рух   | Переміщення (панорама)  |
 | Колесо прокрутки     | Наближення / віддалення |
 | Середня кнопка + рух | Переміщення (панорама)  |
-
-### Автоматичне кадрування моделі
-
-Після завантаження модель автоматично центрується та камера підлаштовується під її розмір:
-
-```javascript
-function fitCameraToModel(object) {
-  const box = new THREE.Box3().setFromObject(object)
-  const size = box.getSize(new THREE.Vector3())
-  const center = box.getCenter(new THREE.Vector3())
-
-  const maxDim = Math.max(size.x, size.y, size.z)
-  const fov = camera.fov * (Math.PI / 180)
-  let cameraDistance = maxDim / (2 * Math.tan(fov / 2))
-
-  camera.position.set(
-    center.x,
-    center.y + maxDim * 0.4,
-    center.z + cameraDistance * 1.6
-  )
-  controls.target.copy(center)
-  controls.update()
-}
-```
-
-### Студійне освітлення
-
-Для реалістичного відображення моделі використовуємо кілька джерел світла:
-
-```javascript
-// Загальне розсіяне світло
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
-
-// Основне спрямоване світло (з тінями)
-const dirLight = new THREE.DirectionalLight(0xffffff, 1.2)
-dirLight.position.set(5, 10, 7)
-dirLight.castShadow = true
-
-// Контрове підсвічування
-const fillLight = new THREE.DirectionalLight(0x8888ff, 0.4)
-fillLight.position.set(-5, 3, -5)
-
-// Небесне освітлення
-const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.6)
-```
-
----
-
-## Використання компонента з фіксованим URL
-
-Якщо ви хочете вбудувати модель, яка завантажується автоматично з файлу у `public/`:
-
-```md
-<BlenderModel src="/models/my-model.glb" height="500px" />
-```
-
-Для цього покладіть файл `.glb` у папку `public/models/` вашого VitePress-проєкту.
-
 ---
 
 ## Поширені проблеми

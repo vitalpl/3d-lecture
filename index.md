@@ -9,10 +9,10 @@ hero:
   actions:
     - theme: brand
       text: Рух по колу
-      link: /3d-lecture-demo/solar-system
+      link: /3d-lecture/solar-system
     - theme: alt
       text: Всі лекції
-      link: /3d-lecture-demo/rotating-shapes
+      link: /3d-lecture/rotating-shapes
 
 features:
   - title: 🌍 Рух по колу
