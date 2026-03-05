@@ -42,15 +42,60 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, watch, nextTick } from 'vue'
 import { useRoute } from 'vitepress'
 
 const route = useRoute()
 const isMounted = ref(false)
 
+function wrapSections() {
+  const main = document.querySelector('.main-content')
+  if (!main) return
+
+  // Skip if already wrapped
+  if (main.querySelector('.content-section')) return
+
+  const children = Array.from(main.children)
+  if (children.length === 0) return
+
+  // Collect groups: each group starts at an h2 (or h1 for the intro)
+  const groups = []
+  let current = []
+
+  children.forEach((el) => {
+    const tag = el.tagName?.toLowerCase()
+    if (tag === 'h2' && current.length > 0) {
+      groups.push(current)
+      current = []
+    }
+    current.push(el)
+  })
+  if (current.length > 0) groups.push(current)
+
+  // Don't wrap if there's only 1 section
+  if (groups.length <= 1) return
+
+  // Wrap each group in a section div
+  groups.forEach((els, i) => {
+    const section = document.createElement('div')
+    section.className = 'content-section ' + (i % 2 === 0 ? 'section-white' : 'section-gray')
+    // Insert the section before the first element of the group
+    main.insertBefore(section, els[0])
+    els.forEach((el) => section.appendChild(el))
+  })
+}
+
 onMounted(() => {
   isMounted.value = true
+  nextTick(() => setTimeout(wrapSections, 100))
 })
+
+watch(
+  () => route.path,
+  () => {
+    nextTick(() => setTimeout(wrapSections, 150))
+  }
+)
 
 const showSidebar = computed(() => {
   if (!isMounted.value) return false
@@ -166,8 +211,21 @@ const showSidebar = computed(() => {
   flex: 1;
   background: white;
   border-radius: 8px;
-  padding: 2rem;
+  padding: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.main-content :deep(.content-section) {
+  padding: 2rem 2.5rem;
+}
+
+.main-content :deep(.section-white) {
+  background: #ffffff;
+}
+
+.main-content :deep(.section-gray) {
+  background: #f5f7fa;
 }
 
 .main-content :deep(h1) {
@@ -301,6 +359,10 @@ const showSidebar = computed(() => {
   }
 
   .main-content {
+    padding: 0;
+  }
+
+  .main-content :deep(.content-section) {
     padding: 1.5rem;
   }
 }
