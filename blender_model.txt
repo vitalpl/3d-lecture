@@ -9,17 +9,10 @@
         <p>{{ error }}</p>
       </div>
     </div>
-    <div class="controls-bar" v-if="!loading && !error">
-      <div class="controls-hint">
-        <span>🖱️ ЛКМ — обертання</span>
-        <span>🖱️ ПКМ — переміщення</span>
-        <span>🖱️ Колесо — масштаб</span>
-      </div>
-      <label v-if="modelUrl" class="pin-toggle" :title="pinned ? 'Відкріпити модель' : 'Закріпити модель (збережеться при навігації)'">
-        <input type="checkbox" v-model="pinned" @change="onPinToggle" />
-        <span class="pin-icon">{{ pinned ? '📌' : '📍' }}</span>
-        <span class="pin-label">{{ pinned ? 'Закріплено' : 'Закріпити' }}</span>
-      </label>
+    <div class="controls-hint" v-if="!loading && !error">
+      <span>🖱️ ЛКМ — обертання</span>
+      <span>🖱️ ПКМ — переміщення</span>
+      <span>🖱️ Колесо — масштаб</span>
     </div>
     <div class="upload-area" v-if="!modelUrl">
       <label class="upload-label">
@@ -53,15 +46,10 @@ const props = defineProps({
   autoRotate: { type: Boolean, default: true }
 })
 
-const STORAGE_KEY_PINNED = 'blender-model-pinned'
-const STORAGE_KEY_DATA = 'blender-model-data'
-const STORAGE_KEY_SRC = 'blender-model-src'
-
 const container = ref(null)
 const loading = ref(false)
 const error = ref('')
 const modelUrl = ref(props.src)
-const pinned = ref(false)
 
 let renderer = null
 let scene = null
@@ -154,86 +142,6 @@ function onFileSelected(event) {
   const url = URL.createObjectURL(file)
   modelUrl.value = url
   loadModel(url)
-
-  // If pinned, save the new file to localStorage
-  if (pinned.value) {
-    saveFileToStorage(file)
-  }
-  // Keep reference for later pinning
-  _lastFile = file
-}
-
-let _lastFile = null
-
-function saveFileToStorage(file) {
-  const reader = new FileReader()
-  reader.onload = () => {
-    try {
-      localStorage.setItem(STORAGE_KEY_DATA, reader.result)
-      localStorage.setItem(STORAGE_KEY_SRC, '')
-      localStorage.setItem(STORAGE_KEY_PINNED, 'true')
-    } catch (e) {
-      console.warn('Модель занадто велика для збереження у localStorage:', e)
-    }
-  }
-  reader.readAsDataURL(file)
-}
-
-function onPinToggle() {
-  if (pinned.value) {
-    // Pin: save current model
-    if (props.src && modelUrl.value === props.src) {
-      // src-based model
-      localStorage.setItem(STORAGE_KEY_SRC, props.src)
-      localStorage.setItem(STORAGE_KEY_DATA, '')
-      localStorage.setItem(STORAGE_KEY_PINNED, 'true')
-    } else if (_lastFile) {
-      // uploaded file
-      saveFileToStorage(_lastFile)
-    }
-  } else {
-    // Unpin: clear storage
-    localStorage.removeItem(STORAGE_KEY_PINNED)
-    localStorage.removeItem(STORAGE_KEY_DATA)
-    localStorage.removeItem(STORAGE_KEY_SRC)
-  }
-}
-
-function loadPinnedModel() {
-  const isPinned = localStorage.getItem(STORAGE_KEY_PINNED) === 'true'
-  if (!isPinned) return false
-
-  pinned.value = true
-
-  const savedSrc = localStorage.getItem(STORAGE_KEY_SRC)
-  if (savedSrc) {
-    modelUrl.value = savedSrc
-    loadModel(savedSrc)
-    return true
-  }
-
-  const savedData = localStorage.getItem(STORAGE_KEY_DATA)
-  if (savedData) {
-    // Convert base64 data URL back to blob
-    const blob = dataURLToBlob(savedData)
-    const url = URL.createObjectURL(blob)
-    modelUrl.value = url
-    loadModel(url)
-    return true
-  }
-
-  return false
-}
-
-function dataURLToBlob(dataURL) {
-  const [header, base64] = dataURL.split(',')
-  const mime = header.match(/:(.*?);/)[1]
-  const binary = atob(base64)
-  const array = new Uint8Array(binary.length)
-  for (let i = 0; i < binary.length; i++) {
-    array[i] = binary.charCodeAt(i)
-  }
-  return new Blob([array], { type: mime })
 }
 
 /* ─── lifecycle ─── */
@@ -316,8 +224,8 @@ onMounted(() => {
   }
   window.addEventListener('resize', handleResize)
 
-  // Try to load a pinned model first, then fall back to src prop
-  if (!loadPinnedModel() && props.src) {
+  // Load model if src prop provided
+  if (props.src) {
     loadModel(props.src)
   }
 
@@ -357,47 +265,13 @@ watch(
   background: v-bind(bg);
 }
 
-.controls-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-}
-
 .controls-hint {
   display: flex;
   gap: 20px;
+  justify-content: center;
+  padding: 8px;
   font-size: 0.85em;
   color: #888;
-}
-
-.pin-toggle {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  user-select: none;
-  padding: 4px 10px;
-  border-radius: 6px;
-  transition: background 0.2s;
-  font-size: 0.85em;
-  color: #aaa;
-}
-
-.pin-toggle:hover {
-  background: rgba(74, 144, 226, 0.1);
-}
-
-.pin-toggle input[type="checkbox"] {
-  display: none;
-}
-
-.pin-icon {
-  font-size: 1.2em;
-}
-
-.pin-label {
-  white-space: nowrap;
 }
 
 .upload-area {
