@@ -7,6 +7,9 @@ export default defineConfig({
   title: "3D Лекції",
   description: "Навчальний ресурс з 3D графіки",
   base: '/3d-lecture/',
+  head: [
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/3d-lecture/images/favicon-32x32.png' }]
+  ],
   buildEnd({ outDir }) {
     // Manually copy public assets (workaround for non-ASCII paths on Windows)
     const publicDir = resolve(__dirname, 'public')
