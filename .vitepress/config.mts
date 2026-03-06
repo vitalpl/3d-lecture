@@ -1,10 +1,19 @@
 import { defineConfig } from 'vitepress'
+import { cpSync, existsSync } from 'fs'
+import { resolve } from 'path'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "3D Лекції",
   description: "Навчальний ресурс з 3D графіки",
   base: '/3d-lecture/',
+  buildEnd({ outDir }) {
+    // Manually copy public assets (workaround for non-ASCII paths on Windows)
+    const publicDir = resolve(__dirname, 'public')
+    if (existsSync(publicDir)) {
+      cpSync(publicDir, outDir, { recursive: true, force: true })
+    }
+  },
   themeConfig: {
     nav: [
       { text: 'Головна', link: '/' },
