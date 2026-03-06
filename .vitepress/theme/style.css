@@ -1,27 +1,59 @@
+/* ═══════════════════════════════════════════════
+   Mint Theme — Глобальні змінні
+   ═══════════════════════════════════════════════ */
+
 :root {
-  --color-primary: #0066cc;
-  --color-primary-dark: #0052a3;
-  --color-background: #f5f7fa;
-  --color-surface: #ffffff;
-  --color-text: #333333;
-  --color-text-secondary: #666666;
-  --color-border: #eeeeee;
-  --border-radius: 8px;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 15px rgba(0, 102, 204, 0.2);
+  /* Mint palette */
+  --color-mint:            #3ecf8e;
+  --color-mint-dark:       #2ab877;
+  --color-mint-darker:     #1f9d64;
+  --color-mint-light:      #e6faf0;
+  --color-mint-ultra-light:#f2fdf8;
+
+  /* Semantic aliases */
+  --color-primary:         var(--color-mint);
+  --color-primary-dark:    var(--color-mint-dark);
+  --color-primary-light:   var(--color-mint-light);
+
+  /* Surfaces */
+  --color-background:      #f4f8f6;
+  --color-surface:         #ffffff;
+  --color-section-gray:    #f0f5f3;
+
+  /* Text */
+  --color-text:            #2c3e40;
+  --color-text-secondary:  #5a6b6e;
+  --color-text-muted:      #8a9a9d;
+
+  /* Borders & shadows */
+  --color-border:          #dce8e3;
+  --border-radius:         8px;
+  --shadow-sm:             0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md:             0 4px 16px rgba(62, 207, 142, 0.18);
+  --shadow-lg:             0 8px 30px rgba(62, 207, 142, 0.12);
 }
+
+/* ═══════════════════════════════════════════════
+   Base
+   ═══════════════════════════════════════════════ */
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text);
 }
 
-/* Scrollbar styling */
+/* ═══════════════════════════════════════════════
+   Scrollbar
+   ═══════════════════════════════════════════════ */
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -40,28 +72,36 @@ body {
   background: var(--color-primary-dark);
 }
 
-/* Selection styling */
+/* ═══════════════════════════════════════════════
+   Selection
+   ═══════════════════════════════════════════════ */
+
 ::selection {
   background-color: var(--color-primary);
   color: white;
 }
 
-/* Custom containers for notes */
-.note, .info-box {
-  background: linear-gradient(135deg, #f0f4ff 0%, #e8f0ff 100%);
+/* ═══════════════════════════════════════════════
+   Info / Warning / Success boxes
+   ═══════════════════════════════════════════════ */
+
+.note,
+.info-box {
+  background: linear-gradient(135deg, var(--color-mint-ultra-light) 0%, var(--color-mint-light) 100%);
   border-left: 4px solid var(--color-primary);
   padding: 1rem 1.5rem;
   border-radius: var(--border-radius);
   margin: 1.5rem 0;
 }
 
-.note h4, .info-box h4 {
-  color: var(--color-primary);
+.note h4,
+.info-box h4 {
+  color: var(--color-primary-dark);
   margin-top: 0;
 }
 
 .warning-box {
-  background: linear-gradient(135deg, #fff5f0 0%, #ffe8e0 100%);
+  background: linear-gradient(135deg, #fff7f0 0%, #ffe8d8 100%);
   border-left: 4px solid #e27b58;
   padding: 1rem 1.5rem;
   border-radius: var(--border-radius);
@@ -69,32 +109,40 @@ body {
 }
 
 .success-box {
-  background: linear-gradient(135deg, #f0fff4 0%, #e0ffe8 100%);
-  border-left: 4px solid #27ae60;
+  background: linear-gradient(135deg, var(--color-mint-ultra-light) 0%, var(--color-mint-light) 100%);
+  border-left: 4px solid var(--color-mint-dark);
   padding: 1rem 1.5rem;
   border-radius: var(--border-radius);
   margin: 1.5rem 0;
 }
 
-/* Buttons */
-button, .btn {
+/* ═══════════════════════════════════════════════
+   Buttons
+   ═══════════════════════════════════════════════ */
+
+button,
+.btn {
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   background: var(--color-primary);
   color: white;
 }
 
-button:hover, .btn:hover {
+button:hover,
+.btn:hover {
   background: var(--color-primary-dark);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
-/* Code snippets */
+/* ═══════════════════════════════════════════════
+   Code language labels
+   ═══════════════════════════════════════════════ */
+
 .language-javascript::before,
 .language-js::before,
 .language-typescript::before,
@@ -110,13 +158,36 @@ button:hover, .btn:hover {
   letter-spacing: 1px;
 }
 
-/* Print styles */
+/* ═══════════════════════════════════════════════
+   VitePress home page overrides (mint)
+   ═══════════════════════════════════════════════ */
+
+.VPHome .VPHero .name {
+  color: var(--color-mint-dark) !important;
+}
+
+.VPHome .VPButton.brand {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.VPHome .VPButton.brand:hover {
+  background-color: var(--color-primary-dark) !important;
+  border-color: var(--color-primary-dark) !important;
+}
+
+/* ═══════════════════════════════════════════════
+   Print
+   ═══════════════════════════════════════════════ */
+
 @media print {
   body {
     background: white;
   }
 
-  .navbar, .footer, .sidebar {
+  .navbar,
+  .footer,
+  .sidebar {
     display: none;
   }
 
@@ -126,7 +197,10 @@ button:hover, .btn:hover {
   }
 }
 
-/* Accessibility */
+/* ═══════════════════════════════════════════════
+   Reduced motion
+   ═══════════════════════════════════════════════ */
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
