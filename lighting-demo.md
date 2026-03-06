@@ -63,13 +63,7 @@ scene.add(light)
 
 Спрямоване світло виходить з точки (як ліхтарик):
 
-```javascript
-const light = new THREE.SpotLight(0xffffff, 1)
-light.position.set(5, 10, 7)
-light.target.position.set(0, 0, 0)
-light.angle = Math.PI / 6
-scene.add(light)
-```
+<lihtar />
 
 - **Конус світла** - освітлює тільки визначену область
 - **Найбільш гнучкий** - контролює напрямок, кут, дальність
