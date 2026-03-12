@@ -24,7 +24,8 @@ export default defineConfig({
       { text: 'Обертання', link: '/rotating-shapes' },
       { text: 'Частинки', link: '/particle-system' },
       { text: 'Освітлення', link: '/lighting-demo' },
-      { text: 'Blender-модель', link: '/blender-model' }
+      { text: 'Blender-модель', link: '/blender-model' },
+      { text: 'Замовлення', link: '/order' }
     ],
     sidebar: [
       {
