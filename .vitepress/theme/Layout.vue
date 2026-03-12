@@ -12,6 +12,7 @@
           <li><a href="/3d-lecture/particle-system">Частинки</a></li>
           <li><a href="/3d-lecture/lighting-demo">Світло</a></li>
           <li><a href="/3d-lecture/blender-model">Blender</a></li>
+          <li><a href="/3d-lecture/order">Замовлення</a></li>
         </ul>
       </div>
     </nav>
@@ -26,6 +27,7 @@
             <li><a href="/3d-lecture/particle-system" class="sidebar-link">Системи частинок</a></li>
             <li><a href="/3d-lecture/lighting-demo" class="sidebar-link">Освітлення & матеріали</a></li>
             <li><a href="/3d-lecture/blender-model" class="sidebar-link">Blender-модель</a></li>
+            <li><a href="/3d-lecture/order" class="sidebar-link">Замовлення 3D-друку</a></li>
           </ul>
         </div>
       </aside>
