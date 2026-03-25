@@ -1,165 +1,76 @@
 ---
 layout: page
-title: Система частинок
-description: Вивчаємо симуляцію та анімацію частинок
+title: Галерея робіт
+description: Найкращі роботи студентів віртуальної лабораторії 3DLab
 ---
 
-# Системи частинок і симуляції
+# 🎨 Галерея робіт
 
-## Вступ
+Тут представлені найкращі роботи студентів нашої віртуальної лабораторії моделювання. Кожен проєкт — це результат навчання, креативності та наполегливої праці.
 
-Системи частинок - це потужний інструмент для симуляції:
-- Часток паперу, дощу, сніге
-- Вибухів і магічних ефектів
-- Дому і гравітації
-- Колій та траєкторій
+---
 
-## Фізика симуляції
+## 🏆 Роботи переможців олімпіади
 
-### Закони руху Ньютона
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
 
-**Перший закон:** Об'єкт залишається в спокої, доки на нього не діє сила
+<div style="background: var(--vp-c-bg-soft, #f5f3ff); border-radius: 16px; padding: 1.5rem; border: 1px solid var(--vp-c-divider, #e0e0ef);">
+  <h3 style="margin-top: 0;">🥇 Архітектурний макет</h3>
+  <p><strong>Автор:</strong> Володимир Іванишин, 34п група</p>
+  <p><strong>Програма:</strong> Blender</p>
+  <p>Детальний архітектурний макет з текстурами та освітленням. Переможець олімпіади з 3D-моделювання 2026.</p>
+</div>
 
-**Другий закон:** F = ma (Сила = маса × прискорення)
+<div style="background: var(--vp-c-bg-soft, #f5f3ff); border-radius: 16px; padding: 1.5rem; border: 1px solid var(--vp-c-divider, #e0e0ef);">
+  <h3 style="margin-top: 0;">🥈 Механічна деталь</h3>
+  <p><strong>Програма:</strong> Fusion 360</p>
+  <p>Параметрична модель механічного вузла, підготовлена до 3D-друку та успішно надрукована на FDM-принтері.</p>
+</div>
 
-**Третій закон:** Кожній дії відповідає протилежна дія
+<div style="background: var(--vp-c-bg-soft, #f5f3ff); border-radius: 16px; padding: 1.5rem; border: 1px solid var(--vp-c-divider, #e0e0ef);">
+  <h3 style="margin-top: 0;">🥉 Персонаж для гри</h3>
+  <p><strong>Програма:</strong> Blender</p>
+  <p>Low-poly персонаж з анімацією ходьби, створений для ігрового проєкту.</p>
+</div>
 
-### Гравітація
+</div>
 
-Гравітаційна сила діє на всі об'єкти:
+---
 
-$$F = -g \cdot m$$
+## 🖨️ 3D-друк
 
-де:
-- **g** - прискорення вільного падіння (≈ 9.8 м/с²)
-- **m** - маса об'єкта
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
 
-У 3D графіці ми часто спрощуємо це до:
+<div style="background: var(--vp-c-bg-soft, #f5f3ff); border-radius: 16px; padding: 1.5rem; border: 1px solid var(--vp-c-divider, #e0e0ef);">
+  <h3 style="margin-top: 0;">📐 Підставка для телефону</h3>
+  <p><strong>Матеріал:</strong> PLA</p>
+  <p>Функціональна підставка, спроєктована у Fusion 360 та надрукована на FDM-принтері.</p>
+</div>
 
-$$v_y = v_y - gravity$$
+<div style="background: var(--vp-c-bg-soft, #f5f3ff); border-radius: 16px; padding: 1.5rem; border: 1px solid var(--vp-c-divider, #e0e0ef);">
+  <h3 style="margin-top: 0;">🔧 Шестерня</h3>
+  <p><strong>Матеріал:</strong> PETG</p>
+  <p>Точна модель шестерні з параметричним дизайном для механічного проєкту.</p>
+</div>
 
-## Інтерактивна демонстрація
+<div style="background: var(--vp-c-bg-soft, #f5f3ff); border-radius: 16px; padding: 1.5rem; border: 1px solid var(--vp-c-divider, #e0e0ef);">
+  <h3 style="margin-top: 0;">🏠 Мініатюра будівлі</h3>
+  <p><strong>Матеріал:</strong> PLA</p>
+  <p>Масштабна модель будівлі коледжу, створена як навчальний проєкт.</p>
+</div>
 
-Подивіться як гравітація впливає на частинки:
+</div>
+
+---
+
+## 💫 Інтерактивна демонстрація
+
+Подивіться, як працює система частинок — елемент спецефектів у 3D-графіці:
 
 <ParticleSystem />
 
-## Реалізація системи частинок
+---
 
-### Структура частинки
+## 📤 Хочеш потрапити до галереї?
 
-```javascript
-class Particle {
-  constructor(x, y, z) {
-    this.position = new THREE.Vector3(x, y, z)
-    this.velocity = new THREE.Vector3(0, 0, 0)
-    this.acceleration = new THREE.Vector3(0, 0, 0)
-    this.life = 1.0  // 0 до 1
-  }
-
-  update(gravity) {
-    // Застосовуємо гравітацію
-    this.velocity.y -= gravity
-    
-    // Оновлюємо позицію
-    this.position.add(this.velocity)
-    
-    // Зменшуємо життя
-    this.life -= 0.01
-  }
-}
-```
-
-### Points Geometry
-
-Для ефективного рендерингу багатьох частинок використовуємо Points:
-
-```javascript
-const geometry = new THREE.BufferGeometry()
-
-// Позиції всіх частинок
-const positions = new Float32Array(particles.length * 3)
-particles.forEach((p, i) => {
-  positions[i * 3] = p.position.x
-  positions[i * 3 + 1] = p.position.y
-  positions[i * 3 + 2] = p.position.z
-})
-
-geometry.setAttribute('position', 
-  new THREE.BufferAttribute(positions, 3))
-
-const material = new THREE.PointsMaterial({
-  size: 0.1,
-  color: 0xff0000
-})
-
-const points = new THREE.Points(geometry, material)
-scene.add(points)
-```
-
-### Симуляційний цикл
-
-```javascript
-function animate() {
-  requestAnimationFrame(animate)
-  
-  // Оновлюємо кожну частинку
-  particles.forEach(particle => {
-    particle.update(gravity)
-    
-    // Перевіряємо межі сцени
-    if (particle.position.y < -10) {
-      particle.position.y = 10  // Переносимо вверх
-      particle.velocity.y = 0
-    }
-  })
-  
-  // Оновлюємо bufferedGeometry
-  geometry.attributes.position.needsUpdate = true
-  
-  renderer.render(scene, camera)
-}
-```
-
-## Оптимізація
-
-### Векторні операції
-```javascript
-// ✅ Добре - миттєво
-const v = new THREE.Vector3(1, 2, 3)
-v.add(new THREE.Vector3(1, 0, 0))
-
-// ❌ Погано - повільно з великою кількістю
-const x = position.x + 1
-const y = position.y
-const z = position.z
-```
-
-### Buffer Attributes
-```javascript
-// Для великих об'єм даних завжди використовуйте BufferAttribute
-const positions = new Float32Array(count * 3)
-geometry.setAttribute('position', 
-  new THREE.BufferAttribute(positions, 3))
-```
-
-## Розширені можливості
-
-- **Текстури** - Замість сфер можна використовувати спрайти
-- **Столкновення** - Визначити щоб частинки опиралися об об'єкти
-- **Сортування** - Обов'язково для прозорих частинок
-- **GPU обчислення** - Для мільйонів частинок
-
-## Завдання
-
-1. Додайте **Ємність** - Частинки збираються в контейнер
-2. Змініть **Форму випромінення** - Замість скрізь, випромінюйте з точки
-3. Додайте **Вітер** - Горизонтальну силу, яка впливає на частинки
-4. Створіть **Фонтан** - Безперервно генеруйте нові частинки
-
-## Посилання
-
-- [Three.js Points](https://threejs.org/docs/#api/en/objects/Points)
-- [Three.js PointsMaterial](https://threejs.org/docs/#api/en/materials/PointsMaterial)
-- [Частинкова система](https://en.wikipedia.org/wiki/Particle_system)
-- [Introduction to Particle Systems](https://dev.epicgames.com/tutorials/)
+Якщо ти студент коледжу і маєш цікаві 3D-роботи, звернися до керівника лабораторії — твій проєкт може з'явитися на цій сторінці!

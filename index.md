@@ -4,28 +4,35 @@ layout: home
 
 hero:
   name: "Віртуальна лабораторія 3DLab"
-  text: "VitePress + Three.js"
-  tagline: Інтерактивні приклади 3D графіки
+  text: "3D-моделювання · Візуалізація · Друк"
+  tagline: Самбірський фаховий коледж економіки та інформаційних технологій
   actions:
     - theme: brand
-      text: Рух по колу
+      text: Уроки
       link: /3d-lecture/solar-system
     - theme: alt
-      text: Всі лекції
-      link: /3d-lecture/rotating-shapes
+      text: Про нас
+      link: /3d-lecture/lighting-demo
 
 features:
-  - title: 🌍 Рух по колу
-    details: Вивчайте орбітальну механіку на прикладі Сонячної системи
-  - title: 🔄 Геометрія й обертання
-    details: Eksperymentujte з різними формами та швидкістю обертання
-  - title: 💫 Системи частинок
-    details: Симулюйте фізику з гравітацією та взаємодіями
-  - title: 💡 Освітлення
-    details: Дізнайтеся як правильне освітлення змінює все
-  - title: 🎨 Blender-модель
+  - title: 🎓 Уроки
+    details: Покрокові навчальні матеріали з Blender, Fusion 360 та 3D-друку
+    link: /3d-lecture/solar-system
+  - title: 📚 База знань
+    details: Довідники, шпаргалки та корисні матеріали з 3D-моделювання
+    link: /3d-lecture/rotating-shapes
+  - title: 🎨 Галерея робіт
+    details: Найкращі роботи студентів нашої віртуальної лабораторії
+    link: /3d-lecture/particle-system
+  - title: 🏫 Про нас
+    details: Віртуальна лабораторія при Самбірському фаховому коледжі
+    link: /3d-lecture/lighting-demo
+  - title: 🖥️ Blender-модель
     details: Завантажуйте 3D-моделі з Blender та взаємодійте з ними у браузері
-    link: /blender-model
+    link: /3d-lecture/blender-model
+  - title: 🖨️ Замовлення 3D-друку
+    details: Замовте друк вашої моделі на 3D-принтері
+    link: /3d-lecture/order
 ---
 
 <script setup>

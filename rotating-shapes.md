@@ -1,114 +1,103 @@
-<template>
-  <div ref="container" class="rotating-shapes-container"></div>
-</template>
+---
+layout: page
+title: База знань
+description: Корисні матеріали та довідкова інформація з 3D-моделювання
+---
 
-<script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import * as THREE from 'three'
+# 📚 База знань
 
-const container = ref(null)
-let renderer = null
-let animationId = null
+Тут зібрані корисні матеріали, довідники та шпаргалки для роботи з 3D-моделюванням, візуалізацією та друком.
 
-onMounted(() => {
-  if (!container.value) return
+---
 
-  // Сцена
-  const scene = new THREE.Scene()
-  scene.background = new THREE.Color(0x101010)
+## 🔷 Основні 3D-примітиви
 
-  // Камера
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    container.value.clientWidth / container.value.clientHeight,
-    0.1,
-    1000
-  )
-  camera.position.z = 20
+Будь-яка складна модель починається з простих форм. Ось базові геометричні примітиви:
 
-  // Рендерер
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-  renderer.setSize(container.value.clientWidth, container.value.clientHeight)
-  renderer.setPixelRatio(window.devicePixelRatio)
-  container.value.appendChild(renderer.domElement)
+<RotatingShapes />
 
-  // Освітлення
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
-  scene.add(ambientLight)
-  const pointLight = new THREE.PointLight(0xffffff, 0.8)
-  pointLight.position.set(10, 10, 10)
-  scene.add(pointLight)
+---
 
-  // Форми
-  const objects = []
+## 📖 Формати 3D-файлів
 
-  // Куб
-  const box = new THREE.Mesh(
-    new THREE.BoxGeometry(3, 3, 3),
-    new THREE.MeshPhongMaterial({ color: 0xff0000, shininess: 50 })
-  )
-  box.position.x = -6
-  scene.add(box)
-  objects.push({ mesh: box, speed: 0.01 })
+| Формат | Опис | Де використовується |
+|--------|------|---------------------|
+| **.STL** | Трикутна сітка без кольору та текстур | 3D-друк, слайсери |
+| **.OBJ** | Сітка з підтримкою матеріалів (.mtl) | Обмін моделями між програмами |
+| **.FBX** | Анімація, скелети, матеріали | Ігрові рушії, анімація |
+| **.glTF / .GLB** | Відкритий стандарт для 3D у вебі | Three.js, WebGL, AR/VR |
+| **.BLEND** | Нативний формат Blender | Робота в Blender |
+| **.STEP / .F3D** | Параметричні CAD-формати | Fusion 360, SolidWorks |
 
-  // Сфера
-  const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(2, 32, 32),
-    new THREE.MeshPhongMaterial({ color: 0x00ff00, shininess: 100 })
-  )
-  sphere.position.x = 0
-  scene.add(sphere)
-  objects.push({ mesh: sphere, speed: 0.008 })
+---
 
-  // Піраміда
-  const cone = new THREE.Mesh(
-    new THREE.ConeGeometry(2, 4, 32),
-    new THREE.MeshPhongMaterial({ color: 0x0000ff, shininess: 80 })
-  )
-  cone.position.x = 6
-  scene.add(cone)
-  objects.push({ mesh: cone, speed: 0.012 })
+## 🎨 Порівняння програм для 3D-моделювання
 
-  // Анімація
-  const animate = () => {
-    animationId = requestAnimationFrame(animate)
-    objects.forEach(obj => {
-      obj.mesh.rotation.x += obj.speed
-      obj.mesh.rotation.y += obj.speed
-    })
-    renderer.render(scene, camera)
-  }
-  animate()
+| Програма | Тип | Ціна | Для чого найкраще |
+|----------|-----|------|-------------------|
+| **Blender** | Полігональне моделювання | Безкоштовна | Моделювання, анімація, рендеринг |
+| **Fusion 360** | Параметричне CAD | Безкоштовна для студентів | Інженерні деталі, 3D-друк |
+| **Tinkercad** | Примітивне CSG | Безкоштовна | Початківці, прості деталі |
+| **SolidWorks** | Професійне CAD | Платна | Промисловий дизайн |
+| **ZBrush** | Скульптинг | Платна | Персонажі, органічні форми |
 
-  // Resize
-  const handleResize = () => {
-    const width = container.value?.clientWidth || 0
-    const height = container.value?.clientHeight || 0
-    camera.aspect = width / height
-    camera.updateProjectionMatrix()
-    renderer.setSize(width, height)
-  }
+---
 
-  window.addEventListener('resize', handleResize)
+## 🖨️ Шпаргалка з параметрів 3D-друку
 
-  onUnmounted(() => {
-    window.removeEventListener('resize', handleResize)
-    if (animationId) cancelAnimationFrame(animationId)
-    if (renderer) {
-      renderer.dispose()
-      container.value?.removeChild(renderer.domElement)
-    }
-  })
-})
-</script>
+### Температура для поширених матеріалів
 
-<style scoped>
-.rotating-shapes-container {
-  width: 100%;
-  height: 500px;
-  border-radius: 8px;
-  background: #101010;
-  margin: 20px 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-</style>
+| Матеріал | Температура сопла | Температура столу | Швидкість |
+|----------|------------------|-------------------|-----------|
+| **PLA** | 190–210°C | 50–60°C | 50–60 мм/с |
+| **ABS** | 220–250°C | 90–110°C | 40–50 мм/с |
+| **PETG** | 220–245°C | 70–80°C | 40–55 мм/с |
+| **TPU** | 210–230°C | 40–60°C | 20–30 мм/с |
+
+### Рекомендоване заповнення (Infill)
+
+| Призначення | Заповнення | Патерн |
+|-------------|-----------|--------|
+| Прототип / декоративна деталь | 10–15% | Grid |
+| Функціональна деталь | 20–40% | Cubic |
+| Механічне навантаження | 50–80% | Gyroid |
+| Максимальна міцність | 100% | Concentric |
+
+---
+
+## ⌨️ Гарячі клавіші
+
+### Blender
+
+| Дія | Клавіша |
+|-----|---------|
+| Переміщення | G |
+| Обертання | R |
+| Масштабування | S |
+| Видалити | X |
+| Додати об'єкт | Shift + A |
+| Edit Mode | Tab |
+| Скасувати | Ctrl + Z |
+
+### Fusion 360
+
+| Дія | Клавіша |
+|-----|---------|
+| Пошук команди | S |
+| Лінія | L |
+| Прямокутник | R |
+| Коло | C |
+| Розмір | D |
+| Обрізка | T |
+| Скасувати | Ctrl + Z |
+
+---
+
+## 🔗 Корисні ресурси
+
+- **Blender** — blender.org
+- **Fusion 360** — autodesk.com/products/fusion-360
+- **Cura** — ultimaker.com/software/ultimaker-cura
+- **PrusaSlicer** — prusa3d.com/page/prusaslicer
+- **Thingiverse** — thingiverse.com (безкоштовні 3D-моделі)
+- **Printables** — printables.com (спільнота та моделі)

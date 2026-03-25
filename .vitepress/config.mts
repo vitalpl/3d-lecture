@@ -20,22 +20,37 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: 'Головна', link: '/' },
-      { text: 'Сонячна система', link: '/solar-system' },
-      { text: 'Обертання', link: '/rotating-shapes' },
-      { text: 'Частинки', link: '/particle-system' },
-      { text: 'Освітлення', link: '/lighting-demo' },
+      {
+        text: 'Уроки',
+        items: [
+          { text: 'Blender для початківців', link: '/blender-basics' },
+          { text: 'Основи Fusion', link: '/fusion-basics' },
+          { text: 'Основи 3D-друку', link: '/3d-print-basics' }
+        ]
+      },
+      { text: 'База знань', link: '/rotating-shapes' },
+      { text: 'Галерея робіт', link: '/particle-system' },
+      { text: 'Про нас', link: '/lighting-demo' },
       { text: 'Blender-модель', link: '/blender-model' },
       { text: 'Замовлення', link: '/order' }
     ],
     sidebar: [
       {
-        text: 'Лекції',
+        text: 'Уроки',
         items: [
-          { text: 'Рух по колу', link: '/solar-system' },
-          { text: 'Геометрія й обертання', link: '/rotating-shapes' },
-          { text: 'Системи частинок', link: '/particle-system' },
-          { text: 'Освітлення', link: '/lighting-demo' },
-          { text: 'Blender-модель', link: '/blender-model' }
+          { text: 'Blender для початківців', link: '/blender-basics' },
+          { text: 'Основи Fusion', link: '/fusion-basics' },
+          { text: 'Основи 3D-друку', link: '/3d-print-basics' }
+        ]
+      },
+      {
+        text: 'Розділи',
+        items: [
+          { text: 'База знань', link: '/rotating-shapes' },
+          { text: 'Галерея робіт', link: '/particle-system' },
+          { text: 'Blender-модель', link: '/blender-model' },
+          { text: 'Про нас', link: '/lighting-demo' },
+          { text: 'Замовлення', link: '/order' }
         ]
       }
     ]

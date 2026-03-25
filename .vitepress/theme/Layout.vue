@@ -7,10 +7,17 @@
         </div>
         <ul class="nav-menu">
           <li><a href="/">Головна</a></li>
-          <li><a href="/3d-lecture/solar-system">Рух по колу</a></li>
-          <li><a href="/3d-lecture/rotating-shapes">Форми</a></li>
-          <li><a href="/3d-lecture/particle-system">Частинки</a></li>
-          <li><a href="/3d-lecture/lighting-demo">Світло</a></li>
+          <li class="nav-dropdown">
+            <a href="#" class="dropdown-toggle" @click.prevent="toggleDropdown">Уроки ▾</a>
+            <ul class="dropdown-menu" v-show="dropdownOpen">
+              <li><a href="/3d-lecture/blender-basics">Blender для початківців</a></li>
+              <li><a href="/3d-lecture/fusion-basics">Основи Fusion</a></li>
+              <li><a href="/3d-lecture/3d-print-basics">Основи 3D-друку</a></li>
+            </ul>
+          </li>
+          <li><a href="/3d-lecture/rotating-shapes">База знань</a></li>
+          <li><a href="/3d-lecture/particle-system">Галерея робіт</a></li>
+          <li><a href="/3d-lecture/lighting-demo">Про нас</a></li>
           <li><a href="/3d-lecture/blender-model">Blender</a></li>
           <li><a href="/3d-lecture/order">Замовлення</a></li>
         </ul>
@@ -20,13 +27,18 @@
     <div class="content-wrapper">
       <aside class="sidebar" v-if="showSidebar">
         <div class="sidebar-content">
-          <h3>📖 Розділи</h3>
+          <h3>📖 Уроки</h3>
           <ul>
-            <li><a href="/3d-lecture/solar-system" class="sidebar-link">Рух по колу в 3D просторі</a></li>
-            <li><a href="/3d-lecture/rotating-shapes" class="sidebar-link">Обертаючі форми</a></li>
-            <li><a href="/3d-lecture/particle-system" class="sidebar-link">Системи частинок</a></li>
-            <li><a href="/3d-lecture/lighting-demo" class="sidebar-link">Освітлення & матеріали</a></li>
+            <li><a href="/3d-lecture/blender-basics" class="sidebar-link">Blender для початківців</a></li>
+            <li><a href="/3d-lecture/fusion-basics" class="sidebar-link">Основи Fusion</a></li>
+            <li><a href="/3d-lecture/3d-print-basics" class="sidebar-link">Основи 3D-друку</a></li>
+          </ul>
+          <h3 style="margin-top: 1.2rem;">📂 Розділи</h3>
+          <ul>
+            <li><a href="/3d-lecture/rotating-shapes" class="sidebar-link">База знань</a></li>
+            <li><a href="/3d-lecture/particle-system" class="sidebar-link">Галерея робіт</a></li>
             <li><a href="/3d-lecture/blender-model" class="sidebar-link">Blender-модель</a></li>
+            <li><a href="/3d-lecture/lighting-demo" class="sidebar-link">Про нас</a></li>
             <li><a href="/3d-lecture/order" class="sidebar-link">Замовлення 3D-друку</a></li>
           </ul>
         </div>
@@ -44,11 +56,24 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, watch, nextTick } from 'vue'
+import { computed, ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRoute } from 'vitepress'
 
 const route = useRoute()
 const isMounted = ref(false)
+const dropdownOpen = ref(false)
+
+function toggleDropdown() {
+  dropdownOpen.value = !dropdownOpen.value
+}
+
+// Close dropdown on click outside
+function handleClickOutside(e) {
+  const dropdown = document.querySelector('.nav-dropdown')
+  if (dropdown && !dropdown.contains(e.target)) {
+    dropdownOpen.value = false
+  }
+}
 
 function wrapSections() {
   const main = document.querySelector('.main-content')
@@ -89,12 +114,18 @@ function wrapSections() {
 
 onMounted(() => {
   isMounted.value = true
+  document.addEventListener('click', handleClickOutside)
   nextTick(() => setTimeout(wrapSections, 100))
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
 })
 
 watch(
   () => route.path,
   () => {
+    dropdownOpen.value = false
     nextTick(() => setTimeout(wrapSections, 150))
   }
 )
@@ -186,6 +217,50 @@ const showSidebar = computed(() => {
 .nav-menu a:hover {
   color: #6366f1;
   background: rgba(99, 102, 241, 0.08);
+}
+
+/* ─── Dropdown ─── */
+.nav-dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+  user-select: none;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff;
+  border: 1px solid var(--color-border, #e0e0ef);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.12);
+  padding: 0.5rem 0;
+  min-width: 220px;
+  z-index: 200;
+  list-style: none;
+  margin-top: 0.4rem;
+}
+
+.dropdown-menu li {
+  margin: 0;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary, #4b5563);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-radius: 0;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(99, 102, 241, 0.08);
+  color: #6366f1;
 }
 
 /* ─── Content wrapper ─── */
