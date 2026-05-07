@@ -4,7 +4,7 @@
 
 :root {
   /* Indigo/Violet palette */
-  --color-mint:            #6366f1;
+  --color-mint:            #282a9b;
   --color-mint-dark:       #4f46e5;
   --color-mint-darker:     #4338ca;
   --color-mint-light:      #eef2ff;
@@ -206,8 +206,23 @@ button:hover,
    Paragraph indentation (site-wide)
    ═══════════════════════════════════════════════ */
 
-.vp-doc p {
-  text-indent: 1.5em;
+.vp-doc p,
+.VPContent p,
+main p {
+  text-indent: 1.5em !important;
+}
+
+/* ═══════════════════════════════════════════════
+   Headings center alignment (site-wide)
+   ═══════════════════════════════════════════════ */
+
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6 {
+  text-align: center !important;
 }
 
 /* ═══════════════════════════════════════════════
