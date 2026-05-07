@@ -23,9 +23,9 @@ export default defineConfig({
       {
         text: 'Уроки',
         items: [
-          { text: 'Blender для початківців', link: '/blender-basics' },
-          { text: 'Основи Fusion', link: '/fusion-basics' },
-          { text: 'Основи 3D-друку', link: '/3d-print-basics' }
+          { text: 'Blender', link: '/blender-basics' },
+          { text: 'Fusion', link: '/fusion-basics' },
+          { text: '3D-друк', link: '/3d-print-basics' }
         ]
       },
       { text: 'База знань', link: '/rotating-shapes' },
@@ -38,9 +38,9 @@ export default defineConfig({
       {
         text: 'Уроки',
         items: [
-          { text: 'Blender для початківців', link: '/blender-basics' },
-          { text: 'Основи Fusion', link: '/fusion-basics' },
-          { text: 'Основи 3D-друку', link: '/3d-print-basics' }
+          { text: 'Blender', link: '/blender-basics' },
+          { text: 'Fusion', link: '/fusion-basics' },
+          { text: '3D-друк', link: '/3d-print-basics' }
         ]
       },
       {

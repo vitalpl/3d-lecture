@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Blender для початківців
+title: Blender
 description: Перші кроки у світі 3D-моделювання в Blender
 ---
 
@@ -8,7 +8,7 @@ description: Перші кроки у світі 3D-моделювання в Bl
 import { withBase } from 'vitepress'
 </script>
 
-# 🎨 Blender для початківців
+# 🎨 Blender
 
 <p align="center">
   <img :src="withBase('/images/Blender_logo_no_text.svg')" alt="Blender Logo" width="160" />

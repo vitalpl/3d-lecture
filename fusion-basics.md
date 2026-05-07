@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Основи Fusion
+title: Fusion
 description: Знайомство з Autodesk Fusion 360 — параметричне моделювання та проєктування
 ---
 

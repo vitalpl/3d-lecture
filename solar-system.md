@@ -15,19 +15,19 @@ description: Навчальні матеріали з 3D-моделювання 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
 
 <div style="background: linear-gradient(135deg, #eef2ff, #e8e0ff); border-radius: 16px; padding: 2rem; border: 1px solid #e0e0ef; transition: transform 0.2s;">
-  <h3 style="margin-top: 0;">🎨 Blender для початківців</h3>
+  <h3 style="margin-top: 0;">🎨 Blender</h3>
   <p>Перші кроки у світі 3D-моделювання. Інтерфейс, навігація, базові інструменти та створення першої моделі.</p>
   <a href="/3d-lecture/blender-basics" style="display: inline-block; padding: 0.5rem 1.2rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border-radius: 8px; text-decoration: none; font-weight: 600;">Почати навчання →</a>
 </div>
 
 <div style="background: linear-gradient(135deg, #eef2ff, #e8e0ff); border-radius: 16px; padding: 2rem; border: 1px solid #e0e0ef; transition: transform 0.2s;">
-  <h3 style="margin-top: 0;">⚙️ Основи Fusion</h3>
+  <h3 style="margin-top: 0;">⚙️ Fusion</h3>
   <p>Знайомство з Autodesk Fusion 360 — ескізи, параметричне моделювання та підготовка деталей до виробництва.</p>
   <a href="/3d-lecture/fusion-basics" style="display: inline-block; padding: 0.5rem 1.2rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border-radius: 8px; text-decoration: none; font-weight: 600;">Почати навчання →</a>
 </div>
 
 <div style="background: linear-gradient(135deg, #eef2ff, #e8e0ff); border-radius: 16px; padding: 2rem; border: 1px solid #e0e0ef; transition: transform 0.2s;">
-  <h3 style="margin-top: 0;">🖨️ Основи 3D-друку</h3>
+  <h3 style="margin-top: 0;">🖨️ 3D-друк</h3>
   <p>Технології 3D-друку, підготовка моделей у слайсері, налаштування принтера та перший успішний друк.</p>
   <a href="/3d-lecture/3d-print-basics" style="display: inline-block; padding: 0.5rem 1.2rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border-radius: 8px; text-decoration: none; font-weight: 600;">Почати навчання →</a>
 </div>

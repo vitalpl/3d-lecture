@@ -10,9 +10,9 @@
           <li class="nav-dropdown">
             <a href="#" class="dropdown-toggle" @click.prevent="toggleDropdown">Уроки ▾</a>
             <ul class="dropdown-menu" v-show="dropdownOpen">
-              <li><a href="/3d-lecture/blender-basics">Blender для початківців</a></li>
-              <li><a href="/3d-lecture/fusion-basics">Основи Fusion</a></li>
-              <li><a href="/3d-lecture/3d-print-basics">Основи 3D-друку</a></li>
+              <li><a href="/3d-lecture/blender-basics">Blender</a></li>
+              <li><a href="/3d-lecture/fusion-basics">Fusion</a></li>
+              <li><a href="/3d-lecture/3d-print-basics">3D-друк</a></li>
             </ul>
           </li>
           <li><a href="/3d-lecture/rotating-shapes">База знань</a></li>
@@ -29,9 +29,9 @@
         <div class="sidebar-content">
           <h3>📖 Уроки</h3>
           <ul>
-            <li><a href="/3d-lecture/blender-basics" class="sidebar-link">Blender для початківців</a></li>
-            <li><a href="/3d-lecture/fusion-basics" class="sidebar-link">Основи Fusion</a></li>
-            <li><a href="/3d-lecture/3d-print-basics" class="sidebar-link">Основи 3D-друку</a></li>
+            <li><a href="/3d-lecture/blender-basics" class="sidebar-link">Blender</a></li>
+            <li><a href="/3d-lecture/fusion-basics" class="sidebar-link">Fusion</a></li>
+            <li><a href="/3d-lecture/3d-print-basics" class="sidebar-link">3D-друк</a></li>
           </ul>
           <h3 style="margin-top: 1.2rem;">📂 Розділи</h3>
           <ul>
