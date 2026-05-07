@@ -4,7 +4,15 @@ title: 3D-друк
 description: Технології 3D-друку, підготовка моделей та перший друк
 ---
 
+<script setup>
+import { withBase } from 'vitepress'
+</script>
+
 # 🖨️ 3D-друк
+
+<p align="center">
+  <img :src="withBase('/images/3d_print.jpg')" alt="3D-друк" style="width: 300px; max-width: 100%; border-radius: 12px;" />
+</p>
 
 ## Що таке 3D-друк?
 

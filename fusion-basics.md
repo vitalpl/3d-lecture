@@ -4,7 +4,15 @@ title: Fusion
 description: Знайомство з Autodesk Fusion 360 — параметричне моделювання та проєктування
 ---
 
+<script setup>
+import { withBase } from 'vitepress'
+</script>
+
 # ⚙️ Основи Fusion 360
+
+<p align="center">
+  <img :src="withBase('/images/Fusion360_Logo.svg')" alt="Fusion 360 Logo" width="200" />
+</p>
 
 ## Що таке Fusion 360?
 
