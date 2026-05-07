@@ -4,10 +4,14 @@ title: Blender для початківців
 description: Перші кроки у світі 3D-моделювання в Blender
 ---
 
+<script setup>
+import { withBase } from 'vitepress'
+</script>
+
 # 🎨 Blender для початківців
 
 <p align="center">
-  <img src="/images/Blender_logo_no_text.svg" alt="Blender Logo" width="160" />
+  <img :src="withBase('/images/Blender_logo_no_text.svg')" alt="Blender Logo" width="160" />
 </p>
 
 ## Що таке Blender?
