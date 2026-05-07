@@ -208,6 +208,7 @@ button:hover,
 
 .vp-doc p,
 .VPContent p,
+.main-content p,
 main p {
   text-indent: 1.5em !important;
 }
@@ -216,12 +217,10 @@ main p {
    Headings center alignment (site-wide)
    ═══════════════════════════════════════════════ */
 
-.vp-doc h1,
-.vp-doc h2,
-.vp-doc h3,
-.vp-doc h4,
-.vp-doc h5,
-.vp-doc h6 {
+.vp-doc h1, .vp-doc h2, .vp-doc h3,
+.vp-doc h4, .vp-doc h5, .vp-doc h6,
+.main-content h1, .main-content h2, .main-content h3,
+.main-content h4, .main-content h5, .main-content h6 {
   text-align: center !important;
 }
 
