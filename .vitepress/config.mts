@@ -8,7 +8,10 @@ export default defineConfig({
   description: "Навчальний ресурс з 3D графіки",
   base: '/3d-lecture/',
   head: [
-    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/3d-lecture/images/favicon-32x32.png' }]
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/3d-lecture/images/favicon-32x32.png' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap' }]
   ],
   buildEnd({ outDir }) {
     // Manually copy public assets (workaround for non-ASCII paths on Windows)

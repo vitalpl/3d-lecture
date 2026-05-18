@@ -2,9 +2,15 @@
   <div class="layout">
     <nav class="navbar">
       <div class="nav-container">
-        <div class="logo">
-          <h1>📚 Віртуальна лабораторія 3DLab</h1>
-        </div>
+        <a href="/3d-lecture/" class="logo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#6366f1"/>
+            <path d="M2 17l10 5 10-5" stroke="#8b5cf6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12l10 5 10-5" stroke="#6366f1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text">3DLab</span>
+          <span class="logo-sub">Віртуальна лабораторія</span>
+        </a>
         <ul class="nav-menu">
           <li><a href="/">Головна</a></li>
           <li class="nav-dropdown">
@@ -27,13 +33,13 @@
     <div class="content-wrapper">
       <aside class="sidebar" v-if="showSidebar">
         <div class="sidebar-content">
-          <h3>📖 Уроки</h3>
+          <p class="sidebar-heading">Уроки</p>
           <ul>
             <li><a href="/3d-lecture/blender-basics" class="sidebar-link">Blender</a></li>
             <li><a href="/3d-lecture/fusion-basics" class="sidebar-link">Fusion</a></li>
             <li><a href="/3d-lecture/3d-print-basics" class="sidebar-link">3D-друк</a></li>
           </ul>
-          <h3 style="margin-top: 1.2rem;">📂 Розділи</h3>
+          <p class="sidebar-heading" style="margin-top: 1.2rem;">Розділи</p>
           <ul>
             <li><a href="/3d-lecture/rotating-shapes" class="sidebar-link">База знань</a></li>
             <li><a href="/3d-lecture/particle-system" class="sidebar-link">Галерея робіт</a></li>
@@ -50,7 +56,26 @@
     </div>
 
     <footer class="footer">
-      <p>© 2026 3DLab · Навчальний ресурс</p>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#6366f1"/>
+            <path d="M2 17l10 5 10-5" stroke="#8b5cf6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12l10 5 10-5" stroke="#6366f1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>3DLab</span>
+        </div>
+        <p class="footer-desc">Навчальний ресурс Самбірського фахового коледжу економіки та інформаційних технологій</p>
+        <nav class="footer-nav" aria-label="Посилання у футері">
+          <a href="/3d-lecture/blender-basics">Blender</a>
+          <a href="/3d-lecture/fusion-basics">Fusion 360</a>
+          <a href="/3d-lecture/3d-print-basics">3D-друк</a>
+          <a href="/3d-lecture/rotating-shapes">База знань</a>
+          <a href="/3d-lecture/particle-system">Галерея</a>
+          <a href="/3d-lecture/order">Замовлення</a>
+        </nav>
+        <p class="footer-copy">© 2026 3DLab — усі права захищені</p>
+      </div>
     </footer>
   </div>
 </template>
@@ -155,28 +180,10 @@ const showSidebar = computed(() => {
 /* ─── Navbar ─── */
 .navbar {
   background: #ffffff;
-  box-shadow: 0 2px 16px rgba(99, 102, 241, 0.08);
+  box-shadow: 0 1px 0 #e5e7eb;
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: none;
-}
-
-.navbar::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6, #a855f7, #6366f1);
-  background-size: 200% 100%;
-  animation: gradient-slide 3s ease infinite;
-}
-
-@keyframes gradient-slide {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
 }
 
 .nav-container {
@@ -188,14 +195,28 @@ const showSidebar = computed(() => {
   align-items: center;
 }
 
-.logo h1 {
-  font-size: 1.4rem;
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-text {
+  font-size: 1.25rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.02em;
+  color: #6366f1;
+  letter-spacing: -0.03em;
+}
+
+.logo-sub {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  font-weight: 400;
+  padding-left: 0.5rem;
+  border-left: 1px solid #e5e7eb;
+  margin-left: 0.1rem;
 }
 
 .nav-menu {
@@ -287,11 +308,13 @@ const showSidebar = computed(() => {
   border: 1px solid var(--color-border, #e0e0ef);
 }
 
-.sidebar-content h3 {
-  margin-bottom: 1rem;
-  color: var(--color-text, #1e1b4b);
-  font-size: 1.05rem;
+.sidebar-content .sidebar-heading {
+  margin-bottom: 0.5rem;
+  color: #9ca3af;
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .sidebar-content ul {
@@ -345,28 +368,27 @@ const showSidebar = computed(() => {
 
 /* ─── Typography ─── */
 .main-content :deep(h1) {
-  font-size: 2.4rem;
+  font-size: 2.1rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 3px solid transparent;
-  border-image: linear-gradient(90deg, #6366f1, #8b5cf6, #a855f7) 1;
-  letter-spacing: -0.02em;
+  color: #1e1b4b;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid #e0e0ef;
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .main-content :deep(h2) {
-  color: var(--color-text, #1e1b4b);
+  color: #1e1b4b;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
-  font-size: 1.65rem;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--color-mint-light, #eef2ff);
+  padding-left: 0.75rem;
+  border-left: 3px solid #6366f1;
 }
 
 .main-content :deep(h3) {
@@ -495,25 +517,62 @@ const showSidebar = computed(() => {
 
 /* ─── Footer ─── */
 .footer {
-  background: #ffffff;
-  border-top: none;
-  padding: 1.5rem 2rem;
-  text-align: center;
-  color: var(--color-text-muted, #9ca3af);
-  font-size: 0.88rem;
-  position: relative;
+  background: #1e1b4b;
+  padding: 2.5rem 2rem;
 }
 
-.footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6, #a855f7, #6366f1);
-  background-size: 200% 100%;
-  animation: gradient-slide 3s ease infinite;
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e0e7ff;
+}
+
+.footer-desc {
+  font-size: 0.85rem;
+  color: #6b7280;
+  max-width: 480px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  margin-top: 0.25rem;
+}
+
+.footer-nav a {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: #c7d2fe;
+}
+
+.footer-copy {
+  font-size: 0.78rem;
+  color: #4b5563;
+  margin: 0;
+  margin-top: 0.5rem;
+  border-top: 1px solid #2d2a5e;
+  padding-top: 0.75rem;
+  width: 100%;
 }
 
 /* ─── Responsive ─── */
@@ -537,6 +596,10 @@ const showSidebar = computed(() => {
     gap: 0.6rem;
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .logo-sub {
+    display: none;
   }
 
   .main-content :deep(.content-section) {
